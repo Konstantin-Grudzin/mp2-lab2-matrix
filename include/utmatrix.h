@@ -186,7 +186,7 @@ TVector<ValType> TVector<ValType>::operator+(TVector<ValType> &v)
 {
     TVector <ValType> B(std::max(v.Size, Size), std::min(v.StartIndex, StartIndex));
     //TVector <ValType> B(v);
-    for (int i = 0; i < std::min(v.StartIndex, StartIndex)+std::max(v.Size, Size); ++i)
+    for (int i = std::min(v.StartIndex, StartIndex); i < std::min(v.StartIndex, StartIndex)+std::max(v.Size, Size); ++i)
     {
         
         ValType x = (*this)[i] + v[i];
@@ -202,7 +202,7 @@ TVector<ValType> TVector<ValType>::operator-(TVector<ValType> &v)
 {
     TVector <ValType> B(std::max(v.Size, Size), std::min(v.StartIndex, StartIndex));
     //TVector <ValType> B(v);
-    for (int i = 0; i < std::min(v.StartIndex, StartIndex) + std::max(v.Size, Size); ++i)
+    for (int i = std::min(v.StartIndex, StartIndex); i < std::min(v.StartIndex, StartIndex) + std::max(v.Size, Size); ++i)
     {
 
         ValType x = (*this)[i] - v[i];
@@ -330,12 +330,7 @@ TMatrix<ValType> TMatrix<ValType>::operator+(TMatrix<ValType> &mt)
     for (int i = 0; i < max(Size, mt.Size); ++i)
     {
         TVector<ValType> tmp;
-        if (i >= mt.Size)
-            tmp = (*this)[i];
-        else if (i >= Size)
-            tmp = mt[i];
-        else
-            tmp = (*this)[i] + mt[i];
+        tmp = (*this)[i] + mt[i];
         A[i] = tmp;
     }
     return A;
@@ -348,12 +343,7 @@ TMatrix<ValType> TMatrix<ValType>::operator-(TMatrix<ValType> &mt)
     for (int i = 0; i < max(Size, mt.Size); ++i)
     {
         TVector<ValType> tmp;
-        if (i >= mt.Size)
-            tmp = (*this)[i];
-        else if (i >= Size)
-            tmp =   mt[i]*(-1);
-        else
-            tmp = (*this)[i] - mt[i];
+        tmp = (*this)[i] - mt[i];
         A[i] = tmp;
     }
     return A;
