@@ -70,13 +70,12 @@ TEST(TMatrix, throws_when_set_element_with_negative_index)
 		
 }
 
-//В моей реализации при вызове слишком большого индекса он кидает нулевой элемент
-//TEST(TMatrix, throws_when_set_element_with_too_large_index)
-//{
-//	const int size = 10;
-//	TMatrix<int> m1(size);
-//	EXPECT_EQ(TVector<int>(size), m1[10]);
-//}
+TEST(TMatrix, throws_when_set_element_with_too_large_index)
+{
+	const int size = 10;
+	TMatrix<int> m1(size);
+	ASSERT_ANY_THROW(m1[10][0]);
+}
 
 TEST(TMatrix, can_assign_matrix_to_itself)
 {
@@ -146,16 +145,13 @@ TEST(TMatrix, can_add_matrices_with_equal_size)
 
 TEST(TMatrix, cant_add_matrices_with_not_equal_size)
 {
-	TMatrix<int> m1(3), m2(2), test(3);
+	TMatrix<int> m1(3), m2(2);
 	m1[0][0] = 5;
 	m1[1][1] = 4;
 	m1[2][2] = 6;
 	m2[0][0] = 1;
 	m2[1][1] = 2;
-	test[0][0] = 6;
-	test[1][1] = 6;
-	test[2][2] = 6;
-	EXPECT_EQ(m1 + m2, test);
+	ASSERT_ANY_THROW(m1 + m2);
 }
 
 TEST(TMatrix, can_subtract_matrices_with_equal_size)
@@ -175,15 +171,12 @@ TEST(TMatrix, can_subtract_matrices_with_equal_size)
 
 TEST(TMatrix, cant_subtract_matrixes_with_not_equal_size)
 {
-	TMatrix<int> m1(3), m2(2), test(3);
+	TMatrix<int> m1(3), m2(2);
 	m1[0][0] = 5;
 	m1[1][1] = 4;
 	m1[2][2] = 6;
 	m2[0][0] = 1;
 	m2[1][1] = 2;
-	test[0][0] = 4;
-	test[1][1] = 2;
-	test[2][2] = 6;
-	EXPECT_EQ(m1 - m2, test);
+	ASSERT_ANY_THROW(m1 - m2);
 }
 

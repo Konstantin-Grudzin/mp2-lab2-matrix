@@ -97,7 +97,7 @@ ValType& TVector<ValType>::operator[](int pos)
     if (pos - StartIndex < Size)
         return pVector[pos - StartIndex];
     else
-        return x;
+        throw "Acces Error";
 } /*-------------------------------------------------------------------------*/
 
 template <class ValType> // сравнение
@@ -281,6 +281,10 @@ TMatrix<ValType>::TMatrix(const TMatrix<ValType> &mt):TVector<TVector<ValType>>(
 template <class ValType> // конструктор преобразования типа
 TMatrix<ValType>::TMatrix(const TVector<TVector<ValType>> &mt):TVector<TVector<ValType>>(mt) 
 {
+    if (mt.Size > MAX_MATRIX_SIZE)
+    {
+        throw "Allocation Error";
+    }
 }
 
 template <class ValType> // сравнение
