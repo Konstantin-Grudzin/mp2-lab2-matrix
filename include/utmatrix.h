@@ -47,7 +47,7 @@ public:
   // ввод-вывод
   friend istream& operator>>(istream &in, TVector &v)
   {
-    for (int i = 0; i < v.StartIndex+v.Size; i++)
+    for (int i = v.StartIndex; i < v.StartIndex+v.Size; i++)
       in >> v[i];
     return in;
   }
